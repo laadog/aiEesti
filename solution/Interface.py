@@ -25,7 +25,7 @@ def main():
     llm = LanguageModel(args.model)
     db = Database(data_folder=args.database_folder, language_model=llm)
 
-    print(f"Updating '{args.input_file}' using model '{args.model}'...")
+    print(f"Updating '{args.input_file}' using model '{args.model}'...\n")
     db.update(args.input_file)
 
     print("Update process completed.")

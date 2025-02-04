@@ -18,7 +18,10 @@ class LanguageModel:
                 Answer YES or NO
             """
         }])
-        reponse = response["message"]["content"]
+        response = response["message"]["content"]
+
+        if "deepseek" in self.model_name:
+            response = response.split("</think>\n\n")[1]
 
         print(response)
-        return "YES" in response
+        return "YES" in response and "NO" not in response
