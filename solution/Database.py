@@ -116,10 +116,10 @@ class Database:
 
 
 
-        updated_filename = f"UPDATED_{input_file}"
+        updated_filename = f"UPDATED_{file_name}"
         doc.save(updated_filename)
 
-        changelog_filename = f"CHANGELOG_{input_file}.txt"
+        changelog_filename = f"CHANGELOG_{file_name}.txt"
         with open(changelog_filename, "w") as changelog:
             changelog.write("\n".join(updates))
 
