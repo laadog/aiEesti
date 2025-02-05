@@ -71,12 +71,13 @@ class Database:
             if Database._is_title(paragraph):
                 if len(previous) != 0:
                     original_text = "\n".join(x.text for x in previous)
+                    print(title + "\n" + original_text + "\n")
                     current_text  = original_text
                     current_file  = file_name
                     current_update = ""
 
                     for replacement in self.sections:
-                        if self.language_model.determine_change(file_name, original_text, current_text, current_file, replacement.filename, replacement.content):
+                        if self.language_model.determine_change(file_name, title + "\n" +original_text, title + "\n" + current_text, current_file, replacement.filename, replacement.title + replacement.content):
                             current_text = replacement.content
                             current_file = replacement.filename
                             current_update = f"Changed section '{title}' to '{replacement.title}' from {replacement.filename}"
@@ -85,7 +86,7 @@ class Database:
                     if current_text != original_text:
                         for p in previous:
                             p.text = ""
-                        p[0].text = current_text
+                        previous[0].text = current_text
                         updates.append(current_update)
                 title = text
                 previous.clear()
@@ -108,7 +109,7 @@ class Database:
                 if current_text != original_text:
                     for p in previous:
                         p.text = ""
-                    p[0].text = current_text
+                    previous[0].text = current_text
                     updates.append(current_update)
 
 
